@@ -96,29 +96,72 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # turn light off
-        self.set_light_off()
-        print(self._list)
-        # pick up first item 
-        self.swap_item()
-        print(self._item)
-        # check to see if next item is smaller, if so keep moving right until you encounter something bigger
-        # if you find something bigger, swap
-        # if you reach the end, swap with last item
-        if self.compare_item() == 1:
-            self.move_right()
-        if self.compare_item() == -1:
-            self.swap_item()
-        if self.compare_item() == None:
-            self.swap_item()
-        print(self._list)
 
-        # if next item is bigger, move right
-        # continue until end of list is reach
-        # if light is on
-        # call function again
-        # else
-        # return list
+        # while the light is OFF (light_is_on is False)
+        while not self.light_is_on():
+            # turn on the light and change the the control variable to True
+            self.set_light_on()
+
+            # can the robot move to the right?
+            # the robot will move to right until arrives at the end of the list
+            while self.can_move_right():    # while True
+                self.swap_item()            # swap the items
+                self.move_right()           # and go to the next right point
+
+                # is the held item greater than the one at the current position?
+                if self.compare_item() > 0:
+                    # if yes, swap the items
+                    # if no, do nothing
+                    self.swap_item()
+                    self.set_light_off()
+
+                # now the previous item is None, and the robot holds the picked item
+                # go back to the previous position
+                self.move_left()
+                # and drop the held item, so that the robot hols None
+                self.swap_item()
+                # go again to the right
+                self.move_right()
+
+            # what if he can go to the left?
+            # the opposite process as going to the right
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+
+                if self.compare_item() < 0:
+                    self.swap_item()
+                    self.set_light_off()
+
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+                
+        # # turn light off
+        # self.set_light_off()
+        # # pick up first item 
+        # self.swap_item()
+        # self.move_right()
+        # print(self._position)
+        # # check to see if next item is smaller, if so keep moving right until you encounter something bigger
+        # while self.compare_item() == 1:
+        #     self.move_right()
+        #     if self.can_move_right() == False:
+        #         self.swap_item()
+        #         self._position == 0
+        #     if self.compare_item() == None:
+
+            
+        #     print(self._position)
+        # print(self._list)
+        # # if you find something bigger, swap
+        #     # turn light on
+        # # if you reach the end, swap
+        #     # turn light on
+        # # reset position to beginning of list
+
+
+        # # return list
 
 
 if __name__ == "__main__":
