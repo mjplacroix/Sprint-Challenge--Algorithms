@@ -48,4 +48,4 @@ Given that you know how many n-stories the building is, you can start at the hal
 
 If the egg breaks, you ignore the floors above and make your search space the floors below. So `top_floor = n // 2` and you check `n // 2` again until you find a floor that the egg doesn't break from. 
 
-If the egg doesn't break, you do the same process, but now ignore the bottom half of the floors so `bottom_floor = n // 2 + 1` continuing your search until found. 
+If the egg doesn't break, you do the same process, but now ignore the bottom half of the floors so `bottom_floor = n // 2 + 1` continuing your search until found.
